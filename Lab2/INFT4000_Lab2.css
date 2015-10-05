@@ -1,0 +1,45 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+input {
+    
+}
+
+form button {
+    margin-top: 1em;
+    float: right;
+    margin-right: 4em;
+}
+
+form {
+    margin-bottom: 2em;
+    width: 20em;
+    background-color: darkgrey;
+    padding: 5px;
+}
+
+form p{
+    float: left;
+    width: 6em;
+}
+
+form p, input {
+    padding: 5px;
+}
+
+#tooltip {
+    position: absolute;
+    top: 200px;
+    left: 200px;
+    z-index: 1;
+    visibility: hidden;    
+    border: 1px solid black;
+    padding: 10px;
+    background-color: deepskyblue;
+}
+
+#studentList {
+    
+}
