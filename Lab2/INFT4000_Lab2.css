@@ -3,26 +3,16 @@
     margin: 0px;
 }
 
-input {
-    
-}
-
-form button {
-    margin-top: 1em;
-    float: right;
-    margin-right: 4em;
-}
-
 form {
     margin-bottom: 2em;
     width: 20em;
-    background-color: darkgrey;
+    background-color: lightblue;
     padding: 5px;
 }
 
-form p{
+form label {
     float: left;
-    width: 6em;
+    width: 6.5em;
 }
 
 form p, input {
@@ -31,15 +21,15 @@ form p, input {
 
 #tooltip {
     position: absolute;
-    top: 200px;
-    left: 200px;
+    top: 10px;
+    left: 400px;
     z-index: 1;
-    visibility: hidden;    
+    visibility: hidden;
     border: 1px solid black;
     padding: 10px;
     background-color: deepskyblue;
 }
 
-#studentList {
-    
+span {
+    color: red;
 }
