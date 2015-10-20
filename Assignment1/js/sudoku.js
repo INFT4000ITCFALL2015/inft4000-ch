@@ -67,10 +67,6 @@ $(document).ready(function () {
         return errorFree;
     }// end checkColumn
 
-    function errorFlash(elements) {
-        $(elements).css("border", "2px solid black");
-    }
-
     function checkRow(row) {
         var targetRow = $("[id^=" + row + "_]"),
             rowValues = $(targetRow).text().split(""),
@@ -153,13 +149,12 @@ $(document).ready(function () {
         // check for DEL or Backspace
         if (event.keyCode === 8 || event.keyCode === 46) {
             // do nothing
-            return;
         } else if (!checkInput(this, keyPressed)) {
             event.preventDefault();
         }
     });// end cells keydown
 
-    $(cells).keyup(function (event) {
+    $(cells).keyup(function () {
         var id = $(this).parents("table").attr("id"),
             coord = $(this).attr("id").split("_");
         if (!checkGrid(id) || !checkRow(coord[0]) || !checkColumn(coord[1])) {
