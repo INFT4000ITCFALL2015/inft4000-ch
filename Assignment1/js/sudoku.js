@@ -5,7 +5,15 @@
 $(document).ready(function () {
     "use strict";
 
-    var cells = $(".nestedTable td");
+    var cells = $(".nestedTable td"),
+        player;
+
+    function Player(name) {
+        this.name = name;
+        this.playerWins = function () {
+            alert("Congratulations, " + name + " you completed the puzzle!");
+        }
+    }// end Player constructor
 
     function setEditableCells() {
         var i;
@@ -80,10 +88,6 @@ $(document).ready(function () {
         return errorFree;
     }// end checkColumn
 
-    function errorFlash(elements) {
-        $(elements).css("border", "2px solid black");
-    }
-
     function checkRow(row) {
         var targetRow = $("[id^=" + row + "_]"),
             rowValues = $(targetRow).text().split(""),
@@ -129,12 +133,13 @@ $(document).ready(function () {
     }// end setGridIDs
 
     function resetGame() {
-        //$(".emptyCells").text("");
         var editCells = $(".emptyCell"),
             i;
         for (i = 0; i < editCells.length; i++) {
             $(editCells[i]).text("");
         }
+        $(".newGame").css("visibility", "visible");
+        $(".game").css("opacity", "0.25");
     }// end resetGame
 
     function isGameDone() {
@@ -153,12 +158,17 @@ $(document).ready(function () {
             }
         }
         return gameDone;
-    }
+    }// end isGameDone
 
+    function newGame(name) {
+        player = new Player(name);
+        $(".newGame").css("visibility", "hidden");
+        $(".game").css("opacity", "1");
+        setGridIDs();
+        setEditableCells();
+        colorGrids();
+    }// end newGame
 
-    setGridIDs();
-    setEditableCells();
-    colorGrids();
 
     // -----LISTENERS-----
 
@@ -167,13 +177,12 @@ $(document).ready(function () {
         // check for DEL or Backspace
         if (event.keyCode === 8 || event.keyCode === 46) {
             // do nothing
-            return;
         } else if (!checkInput(this, keyPressed)) {
             event.preventDefault();
         }
     });// end cells keydown
 
-    $(cells).keyup(function (event) {
+    $(cells).keyup(function () {
         var id = $(this).parents("table").attr("id"),
             coord = $(this).attr("id").split("_");
         if (!checkGrid(id) || !checkRow(coord[0]) || !checkColumn(coord[1])) {
@@ -182,12 +191,19 @@ $(document).ready(function () {
             $(this).css("color", "green");
         }
         if (isGameDone()) {
-            alert("Congrats");
+            player.playerWins();
         }
     });// end cells keyup
 
     $("#reset").click(function () {
         resetGame();
     });// end reset listener
+
+    $("#begin").click(function () {
+        var playerName = $("#playerName").val();
+        if (playerName.length > 0) {
+            newGame(playerName);
+        }
+    });// end begin listener
 
 });
