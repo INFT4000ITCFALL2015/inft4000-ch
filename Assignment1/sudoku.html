@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="js/jquery-2.1.4.js"></script>
-        <script src="js/sudoku.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
-        <title>Sudoku</title>
-    </head>
-    <body>
-        <section>
-            <button id="reset">Reset</button>
-        </section>
-        <section>
-            <div class="game">
-                <table class="Sudoku" id="sudoku">
+<head>
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/sudoku.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <title>Sudoku</title>
+</head>
+<body>
+<section>
+    <button id="reset">Reset</button>
+</section>
+<section>
+    <div class="game">
+        <table class="Sudoku" id="sudoku">
+            <tr>
+                <td>
                     <table class="nestedTable" id="grid1">
                         <!--Row #1-->
                         <tr>
@@ -33,6 +35,8 @@
                             <td></td>
                         </tr>
                     </table>
+                </td>
+                <td>
                     <table class="nestedTable" id="grid2">
                         <!--Row #1-->
                         <tr>
@@ -53,6 +57,8 @@
                             <td></td>
                         </tr>
                     </table>
+                </td>
+                <td>
                     <table class="nestedTable" id="grid3">
                         <!--Row #1-->
                         <tr>
@@ -73,6 +79,10 @@
                             <td></td>
                         </tr>
                     </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <table class="nestedTable" id="grid4">
                         <!--Row #1-->
                         <tr>
@@ -93,6 +103,8 @@
                             <td>2</td>
                         </tr>
                     </table>
+                </td>
+                <td>
                     <table class="nestedTable" id="grid5">
                         <!--Row #1-->
                         <tr>
@@ -113,6 +125,8 @@
                             <td></td>
                         </tr>
                     </table>
+                </td>
+                <td>
                     <table class="nestedTable" id="grid6">
                         <!--Row #1-->
                         <tr >
@@ -133,6 +147,10 @@
                             <td></td>
                         </tr>
                     </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <table class="nestedTable" id="grid7">
                         <!--Row #1-->
                         <tr >
@@ -153,6 +171,8 @@
                             <td></td>
                         </tr>
                     </table>
+                </td>
+                <td>
                     <table class="nestedTable" id="grid8">
                         <!--Row #1-->
                         <tr >
@@ -173,6 +193,8 @@
                             <td>1</td>
                         </tr>
                     </table>
+                </td>
+                <td>
                     <table class="nestedTable" id="grid9">
                         <!--Row #1-->
                         <tr>
@@ -193,8 +215,10 @@
                             <td></td>
                         </tr>
                     </table>
-                </table>
-            </div>
-        </section>
-    </body>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+</body>
 </html>

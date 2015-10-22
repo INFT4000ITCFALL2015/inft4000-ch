@@ -13,6 +13,12 @@ body:after {
     clear: both;
 }
 
+button {
+    width: 100px;
+    height: 40px;
+    margin-left: 105px;
+}
+
 .game {
     padding-left: 100px;
 }
@@ -24,7 +30,7 @@ body:after {
 
 section {
     margin: auto;
-    background-color: lightblue;
+    background-color: beige;
 }
 section:after {
     content: "";
@@ -32,17 +38,14 @@ section:after {
     clear: both;
 }
 
-table.Sudoku {
-    margin: 0 auto;
+.Sudoku {
+    padding-bottom: 25px;
 }
 
-td {
-    color: grey;
+.Sudoku table td {
+    color: black;
     border: 2px solid black;
     font-weight: 600;
-}
-
-td {
     width: 40px;
     height: 40px;
     font-size: 18pt;
@@ -50,14 +53,7 @@ td {
     text-align: center;
 }
 
-.nestedTable {
-    float: left;
-}
-
-.nestedTable:nth-child(3n+2) {
-    clear: left;
-}
-
+/*
 .nestedTable:nth-child(even) td {
     background-color: #E0F0FF;
 }
@@ -65,3 +61,4 @@ td {
 .nestedTable:nth-child(odd) td {
     background-color: #FFFFFF;
 }
+*/

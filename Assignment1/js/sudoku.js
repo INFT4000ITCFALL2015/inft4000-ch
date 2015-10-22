@@ -5,7 +5,7 @@
 $(document).ready(function () {
     "use strict";
 
-    var cells = $("td");
+    var cells = $(".nestedTable td");
 
     function setEditableCells() {
         var i;
@@ -42,6 +42,19 @@ $(document).ready(function () {
         return count;
     }// end countOccurance
 
+    function colorGrids() {
+        var gridValues,
+            i;
+        for (i = 0; i < 9; i += 2) {
+            gridValues = $("#grid" + i + " td");
+            $(gridValues).css("background-color", "#ccffcc");
+        }
+        for (i = 1; i < 10; i += 2) {
+            gridValues = $("#grid" + i + " td");
+            $(gridValues).css("background-color", "#ffffcc");
+        }
+    }// end colorGrids
+
     function checkGrid(grid) {
         var gridValues = $("#" + grid + " td").text().split(""),
             errorFree = true,
@@ -67,6 +80,10 @@ $(document).ready(function () {
         return errorFree;
     }// end checkColumn
 
+    function errorFlash(elements) {
+        $(elements).css("border", "2px solid black");
+    }
+
     function checkRow(row) {
         var targetRow = $("[id^=" + row + "_]"),
             rowValues = $(targetRow).text().split(""),
@@ -81,7 +98,7 @@ $(document).ready(function () {
     }// end checkRow
 
     function setGridIDs() {
-        var TDs = $("td"),
+        var TDs = $(".nestedTable td"),
             i = 0,
             row,
             col,
@@ -141,6 +158,7 @@ $(document).ready(function () {
 
     setGridIDs();
     setEditableCells();
+    colorGrids();
 
     // -----LISTENERS-----
 
@@ -149,12 +167,13 @@ $(document).ready(function () {
         // check for DEL or Backspace
         if (event.keyCode === 8 || event.keyCode === 46) {
             // do nothing
+            return;
         } else if (!checkInput(this, keyPressed)) {
             event.preventDefault();
         }
     });// end cells keydown
 
-    $(cells).keyup(function () {
+    $(cells).keyup(function (event) {
         var id = $(this).parents("table").attr("id"),
             coord = $(this).attr("id").split("_");
         if (!checkGrid(id) || !checkRow(coord[0]) || !checkColumn(coord[1])) {
