@@ -6,12 +6,19 @@ $(document).ready(function () {
     "use strict";
 
     var cells = $(".nestedTable td"),
-        player;
+        player,
+        timer;
 
     function Player(name) {
         this.name = name;
+        this.score = 900;
+        this.scoreCounter = function () {
+            this.score -= 1;
+        };
+        //this.gameTimer = setInterval(this.scoreCounter(), 1000);
         this.playerWins = function () {
-            alert("Congratulations, " + name + " you completed the puzzle!");
+            alert("Congratulations, " + this.name + " you completed the puzzle! \n" +
+                "Your score is " + this.score);
         }
     }// end Player constructor
 
@@ -39,7 +46,7 @@ $(document).ready(function () {
         return isValid;
     }// end checkInput
 
-    function countOccurance(array, num) {
+    function countOccurrence(array, num) {
         var count = 0,
             i;
         for (i = 0; i < array.length; i++) {
@@ -48,7 +55,7 @@ $(document).ready(function () {
             }
         }
         return count;
-    }// end countOccurance
+    }// end countOccurrence
 
     function colorGrids() {
         var gridValues,
@@ -68,9 +75,14 @@ $(document).ready(function () {
             errorFree = true,
             i;
         for (i = 1; i < 10; i++) {
-            if (countOccurance(gridValues, i.toString()) > 1) {
+            if (countOccurrence(gridValues, i.toString()) > 1) {
                 errorFree = false;
             }
+        }
+        if (!errorFree) {
+            $("#errorOutput").text("Value already exists in the grid");
+        } else {
+            $("#errorOutput").text("");
         }
         return errorFree;
     }// end checkGrid
@@ -81,9 +93,14 @@ $(document).ready(function () {
             errorFree = true,
             i;
         for (i = 0; i < 10; i++) {
-            if (countOccurance(colValues, i.toString()) > 1) {
+            if (countOccurrence(colValues, i.toString()) > 1) {
                 errorFree = false;
             }
+        }
+        if (!errorFree) {
+            $("#errorOutput").text("Value already exists in the column");
+        } else {
+            $("#errorOutput").text("");
         }
         return errorFree;
     }// end checkColumn
@@ -94,9 +111,14 @@ $(document).ready(function () {
             errorFree = true,
             i;
         for (i = 0; i < 10; i++) {
-            if (countOccurance(rowValues, i.toString()) > 1) {
+            if (countOccurrence(rowValues, i.toString()) > 1) {
                 errorFree = false;
             }
+        }
+        if (!errorFree) {
+            $("#errorOutput").text("Value already exists in the row");
+        } else {
+            $("#errorOutput").text("");
         }
         return errorFree;
     }// end checkRow
@@ -167,6 +189,7 @@ $(document).ready(function () {
         setGridIDs();
         setEditableCells();
         colorGrids();
+        timer = setInterval(player.scoreCounter(), 1000);
     }// end newGame
 
 
