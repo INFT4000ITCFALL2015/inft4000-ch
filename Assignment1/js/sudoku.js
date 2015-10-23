@@ -36,12 +36,17 @@ $(document).ready(function () {
     function checkInput(editedCell, keyPressed) {
         var regexPattern = /^[1-9]$/,
             currentInput = $(editedCell).text(),
-            isValid = true;
+            isValid = true,
+            errorBox = $("#errorOutput");
         if (!regexPattern.test(keyPressed)) {
             isValid = false;
+            $(errorBox).text("Please enter a number between 1 and 9")
             // show an error
         } else if (currentInput.length > 0) {
             isValid = false;
+            $(errorBox).text("Only one number can be entered in each box");
+        } else {
+            $(errorBox).text("");
         }
         return isValid;
     }// end checkInput
