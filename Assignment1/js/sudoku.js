@@ -2,6 +2,7 @@
 /*jslint plusplus: true*/
 /*global  $*/
 
+
 $(document).ready(function () {
     "use strict";
 
@@ -12,10 +13,6 @@ $(document).ready(function () {
     function Player(name) {
         this.name = name;
         this.score = 900;
-        this.scoreCounter = function () {
-            this.score -= 1;
-        };
-        //this.gameTimer = setInterval(this.scoreCounter(), 1000);
         this.playerWins = function () {
             alert("Congratulations, " + this.name + " you completed the puzzle! \n" +
                 "Your score is " + this.score);
@@ -36,17 +33,11 @@ $(document).ready(function () {
     function checkInput(editedCell, keyPressed) {
         var regexPattern = /^[1-9]$/,
             currentInput = $(editedCell).text(),
-            isValid = true,
-            errorBox = $("#errorOutput");
+            isValid = true;
         if (!regexPattern.test(keyPressed)) {
             isValid = false;
-            $(errorBox).text("Please enter a number between 1 and 9")
-            // show an error
         } else if (currentInput.length > 0) {
             isValid = false;
-            $(errorBox).text("Only one number can be entered in each box");
-        } else {
-            $(errorBox).text("");
         }
         return isValid;
     }// end checkInput
@@ -194,7 +185,9 @@ $(document).ready(function () {
         setGridIDs();
         setEditableCells();
         colorGrids();
-        timer = setInterval(player.scoreCounter(), 1000);
+        timer = setInterval(function () {
+            player.score -= 1;
+        }, 1000);
     }// end newGame
 
 
