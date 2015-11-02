@@ -2,10 +2,22 @@
 /*jslint plusplus: true*/
 /*global  $*/
 
+
 $(document).ready(function () {
     "use strict";
 
-    var cells = $("td");
+    var cells = $(".nestedTable td"),
+        player,
+        timer;
+
+    function Player(name) {
+        this.name = name;
+        this.score = 900;
+        this.playerWins = function () {
+            alert("Congratulations, " + this.name + " you completed the puzzle! \n" +
+                "Your score is " + this.score);
+        }
+    }// end Player constructor
 
     function setEditableCells() {
         var i;
@@ -24,14 +36,13 @@ $(document).ready(function () {
             isValid = true;
         if (!regexPattern.test(keyPressed)) {
             isValid = false;
-            // show an error
         } else if (currentInput.length > 0) {
             isValid = false;
         }
         return isValid;
     }// end checkInput
 
-    function countOccurance(array, num) {
+    function countOccurrence(array, num) {
         var count = 0,
             i;
         for (i = 0; i < array.length; i++) {
@@ -40,16 +51,34 @@ $(document).ready(function () {
             }
         }
         return count;
-    }// end countOccurance
+    }// end countOccurrence
+
+    function colorGrids() {
+        var gridValues,
+            i;
+        for (i = 0; i < 9; i += 2) {
+            gridValues = $("#grid" + i + " td");
+            $(gridValues).css("background-color", "#ccffcc");
+        }
+        for (i = 1; i < 10; i += 2) {
+            gridValues = $("#grid" + i + " td");
+            $(gridValues).css("background-color", "#ffffcc");
+        }
+    }// end colorGrids
 
     function checkGrid(grid) {
         var gridValues = $("#" + grid + " td").text().split(""),
             errorFree = true,
             i;
         for (i = 1; i < 10; i++) {
-            if (countOccurance(gridValues, i.toString()) > 1) {
+            if (countOccurrence(gridValues, i.toString()) > 1) {
                 errorFree = false;
             }
+        }
+        if (!errorFree) {
+            $("#errorOutput").text("Value already exists in the grid");
+        } else {
+            $("#errorOutput").text("");
         }
         return errorFree;
     }// end checkGrid
@@ -60,9 +89,14 @@ $(document).ready(function () {
             errorFree = true,
             i;
         for (i = 0; i < 10; i++) {
-            if (countOccurance(colValues, i.toString()) > 1) {
+            if (countOccurrence(colValues, i.toString()) > 1) {
                 errorFree = false;
             }
+        }
+        if (!errorFree) {
+            $("#errorOutput").text("Value already exists in the column");
+        } else {
+            $("#errorOutput").text("");
         }
         return errorFree;
     }// end checkColumn
@@ -73,15 +107,20 @@ $(document).ready(function () {
             errorFree = true,
             i;
         for (i = 0; i < 10; i++) {
-            if (countOccurance(rowValues, i.toString()) > 1) {
+            if (countOccurrence(rowValues, i.toString()) > 1) {
                 errorFree = false;
             }
+        }
+        if (!errorFree) {
+            $("#errorOutput").text("Value already exists in the row");
+        } else {
+            $("#errorOutput").text("");
         }
         return errorFree;
     }// end checkRow
 
     function setGridIDs() {
-        var TDs = $("td"),
+        var TDs = $(".nestedTable td"),
             i = 0,
             row,
             col,
@@ -112,12 +151,13 @@ $(document).ready(function () {
     }// end setGridIDs
 
     function resetGame() {
-        //$(".emptyCells").text("");
         var editCells = $(".emptyCell"),
             i;
         for (i = 0; i < editCells.length; i++) {
             $(editCells[i]).text("");
         }
+        $(".newGame").css("visibility", "visible");
+        $(".game").css("opacity", "0.25");
     }// end resetGame
 
     function isGameDone() {
@@ -136,11 +176,20 @@ $(document).ready(function () {
             }
         }
         return gameDone;
-    }
+    }// end isGameDone
 
+    function newGame(name) {
+        player = new Player(name);
+        $(".newGame").css("visibility", "hidden");
+        $(".game").css("opacity", "1");
+        setGridIDs();
+        setEditableCells();
+        colorGrids();
+        timer = setInterval(function () {
+            player.score -= 1;
+        }, 1000);
+    }// end newGame
 
-    setGridIDs();
-    setEditableCells();
 
     // -----LISTENERS-----
 
@@ -163,12 +212,19 @@ $(document).ready(function () {
             $(this).css("color", "green");
         }
         if (isGameDone()) {
-            alert("Congrats");
+            player.playerWins();
         }
     });// end cells keyup
 
     $("#reset").click(function () {
         resetGame();
     });// end reset listener
+
+    $("#begin").click(function () {
+        var playerName = $("#playerName").val();
+        if (playerName.length > 0) {
+            newGame(playerName);
+        }
+    });// end begin listener
 
 });
