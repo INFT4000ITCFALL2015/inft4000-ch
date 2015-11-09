@@ -1,0 +1,35 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+form {
+    margin-bottom: 2em;
+    width: 20em;
+    background-color: lightblue;
+    padding: 5px;
+}
+
+form label {
+    float: left;
+    width: 6.5em;
+}
+
+form p, input {
+    padding: 5px;
+}
+
+#tooltip {
+    position: absolute;
+    top: 10px;
+    left: 400px;
+    z-index: 1;
+    visibility: hidden;
+    border: 1px solid black;
+    padding: 10px;
+    background-color: deepskyblue;
+}
+
+span {
+    color: red;
+}
