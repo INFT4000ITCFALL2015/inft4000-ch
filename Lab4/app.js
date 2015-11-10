@@ -1,53 +1,43 @@
-(function() {
-    angular.module("app", [])
-        .controller("studentController", ["$scope", function ($scope) {
+angular.module("app", [])
+    .controller("studentController", ["$scope", function ($scope) {
 
-            $scope.students = [];
+        $scope.students = [];
+        $scope.errorText = '';
+        $scope.displayJSON = false;
+        $scope.textJSON = '';
 
-            $scope.addNewStudent = function() {
-                $scope.students.push({id:$scope.id, fName:$scope.fName, lName:$scope.lName})
+        $scope.addNewStudent = function () {
+            var isValid = true;
+            if ($scope.students.length > 0) {
+                angular.forEach($scope.students, function (student) {
+                    if (student.id === $scope.id) {
+                        isValid = false;
+                    }
+                });
+            }
+            if (isValid) {
+                $scope.students.push({id: $scope.id, fName: $scope.fName, lName: $scope.lName});
                 $scope.id = '';
                 $scope.fName = '';
                 $scope.lName = '';
-            };
-        }])
+            } else {
+                $scope.errorText = "A student with that ID already exists";
+                $scope.id = '';
+                $scope.fName = '';
+                $scope.lName = '';
+            }
+        };
 
-        .directive('studentReport', function() {
-            return {
-                template: 'Students: {{students}}'
-            };
-        })
-});
+        $scope.clearError = function () {
+            $scope.errorText = "";
+        };
 
-//angular.module('todoApp',[])
-//    .controller('todoController',function($scope){
-//
-//        $scope.todos = [];
-//
-//        $scope.addNewTodo = function(){
-//            $scope.todos.push({text:$scope.newItem,done:false});
-//            $scope.newItem = "";
-//        }; // end of add new tudo function
-//
-//        $scope.archiveTodos = function(){
-//
-//            var tempArray = $scope.todos;
-//            $scope.todos = [];
-//
-//            angular.forEach(tempArray,function(todo){
-//                if(!todo.done)
-//                {
-//                    $scope.todos.push(todo);
-//                }
-//            });
-//        }; // end of archive function
-//
-//    }) // end of controller code
+        $scope.showJSON = function () {
+            $scope.textJSON = JSON.stringify($scope.students);
+            $scope.displayJSON = true;
+        };
 
-//    .directive('myTodoReport', function() {
-//        return {
-//            template: 'Todo Count: {{todos.length}}'
-//        };
-//    }) // end of directive code
-//
-//; // end of the module
+        $scope.hideTooltip = function () {
+            $scope.displayJSON = false;
+        };
+    }]);
