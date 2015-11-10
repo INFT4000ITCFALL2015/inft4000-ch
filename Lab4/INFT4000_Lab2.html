@@ -25,6 +25,7 @@
 </div>
 <div id="studentList">
     <ul id="displayStudents">
+        <li>{{id}} {{fName}} {{lName}}</li>
         <li ng-repeat="student in students" ng-mouseover="showJSON()">{{student.id}}, {{student.fName}}
             {{student.lName}}
         </li>
