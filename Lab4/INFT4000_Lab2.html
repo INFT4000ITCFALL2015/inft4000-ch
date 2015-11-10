@@ -3,9 +3,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="INFT4000_Lab2.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-    <!--<script src="bower_components/angular/angular.min.js"></script>-->
     <script src="app.js"></script>
-    <!--<script src="INFT4000_Lab2.js"></script>-->
 </head>
 <body ng-controller="studentController">
 <div id="studentInputForm">
@@ -25,7 +23,9 @@
 </div>
 <div id="studentList">
     <ul id="displayStudents">
-        <li ng-repeat="student in students" ng-mouseover="showJSON()">{{student.id}}, {{student.fName}} {{student.lName}}</li>
+        <li ng-repeat="student in students" ng-mouseover="showJSON()">{{student.id}}, {{student.fName}}
+            {{student.lName}}
+        </li>
     </ul>
 </div>
 <div id="tooltip" ng-show="displayJSON" ng-click="hideTooltip()">{{textJSON}}</div>
