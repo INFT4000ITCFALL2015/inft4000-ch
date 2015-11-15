@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <title>Assignment #2</title>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/INFT4000_Lab2.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-ace/ui-ace.js"></script>
+    <link rel="stylesheet" type="text/css" href="bower_components/angular-ui-grid/ui-grid.css"/>
+    <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
+    <script src="js/students.json"></script>
+    <script src="js/app.js"></script>
+</head>
+<body ng-controller="studentController">
+<div class="wrapper clearfix">
+    <div id="studentInputForm" class="container col-md-4">
+        <form role="form" id="inputNewStudent" autocomplete="off" ng-submit="addNewStudent()">
+            <h3>Add New Student</h3><br>
+
+            <div class="form-group">
+                <label for="studentID">Student ID:</label>
+                <input id="studentID" class="form-control" type="text" name="studentID" ng-model="id"
+                       ng-focus="clearError()">
+            </div>
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input id="firstName" class="form-control" type="text" name="firstName" ng-model="fName"
+                       ng-focus="clearError()">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input id="lastName" class="form-control" type="text" name="lastName" ng-model="lName"
+                       ng-focus="clearError()">
+            </div>
+            <input id="submitStudent" class="btn btn-default" type="submit" value="Submit">
+            <span id="errorField">{{errorText}}</span>
+        </form>
+    </div>
+    <!--<div id="studentList" class="container col-md-8">-->
+        <!--<table id="displayStudents" class="table">-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th>Student ID</th>-->
+                <!--<th>First Name</th>-->
+                <!--<th>Last Name</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tr ng-repeat="student in students" ng-mouseover="showJSON()">-->
+                <!--<td>{{student.id}}</td>-->
+                <!--<td>{{student.firstName}}</td>-->
+                <!--<td>{{student.lastName}}</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td>{{id}}</td>-->
+                <!--<td>{{fName}}</td>-->
+                <!--<td>{{lName}}</td>-->
+            <!--</tr>-->
+        <!--</table>-->
+    <!--</div>-->
+    <div id="grid1" ui-grid="{ data: students }" ui-grid-edit class="grid col-md-6"></div>
+    <div id="tooltip" ng-show="displayJSON" ng-click="hideTooltip()">{{textJSON}}</div>
+</div>
+</body>
+</html>

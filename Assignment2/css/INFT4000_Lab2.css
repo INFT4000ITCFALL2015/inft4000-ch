@@ -1,0 +1,29 @@
+.wrapper {
+    padding-top: 150px;
+    width: 65%;
+    margin: 0 auto;
+}
+
+.table {
+    margin-top: 75px;
+}
+
+#tooltip {
+    position: absolute;
+    width: 700px;
+    top: 10px;
+    left: 400px;
+    z-index: 1;
+    border: 1px solid black;
+    padding: 10px;
+    background-color: deepskyblue;
+}
+
+span#errorField {
+    color: red;
+}
+
+#grid1 {
+    padding: 0;
+    margin: 50px 0 0 0;
+}
