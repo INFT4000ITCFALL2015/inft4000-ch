@@ -1,0 +1,25 @@
+{
+  "name": "Assignment2",
+  "version": "0.0.0",
+  "homepage": "https://github.com/INFT4000ITCFALL2015/inft4000-ch",
+  "authors": [
+    "Christian"
+  ],
+  "description": "INFT4000 Assignment 2",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-ace": "bower",
+    "angular-ui-calendar": "~1.0.1",
+    "angular-ui-grid": "~3.0.7",
+    "angular-ui-mask": "~1.6.1",
+    "angular": "~1.4.7",
+    "bootstrap": "~3.3.5"
+  }
+}
