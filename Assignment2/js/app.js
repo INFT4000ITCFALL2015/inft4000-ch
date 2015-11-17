@@ -1,5 +1,5 @@
 (function () {
-    angular.module("app", ["ui.grid", "ui.grid.edit"])
+    angular.module("app", ["ui.grid", "ui.grid.edit", "ui.mask"])
         .controller("studentController", ["$scope", "$http", function ($scope, $http) {
 
             $scope.students = [];
