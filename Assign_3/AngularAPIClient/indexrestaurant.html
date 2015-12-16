@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Restauraunts Mongo DB</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="bower_components/angular-base64/angular-base64.min.js"></script>
+    <script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
+
+    <script src="restaurantscripts.js"></script>
+    <style type="text/css">
+        /*label {*/
+            /*width: 80px;*/
+        /*}*/
+
+        /*input {*/
+            /*margin-right: 10px;*/
+        /*}*/
+
+        #restaurantReport {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 250px;
+            background-color: lightcyan;
+        }
+    </style>
+</head>
+<div class="container">
+    <body data-ng-controller="restaurantController">
+
+    <h1 class="bg-success">Last Operation Status: {{message}}</h1>
+
+    <hr/>
+
+    <!-- popup -->
+    <div id="restaurantReport" data-ng-show="displayReport" data-ng-click="hideReport()">
+
+        <p>Borough: {{selectedRestaurant.borough}}</p>
+
+        <p>Address:</p>
+
+        <p>Building:{{selectedRestaurant.address[0].building}}</p>
+
+        <p>Street:{{selectedRestaurant.address[0].street}}</p>
+
+        <p>Zip Code:{{selectedRestaurant.address[0].zipcode}}</p>
+
+        <p>Cuisine: {{selectedRestaurant.cuisine}}</p>
+
+        <p>Name: {{selectedRestaurant.name}}</p>
+
+        <p>Restaurant ID: {{selectedRestaurant.restaurant_id}}</p>
+
+        <p>Date: {{selectedRestaurant.grades[0].date}}</p>
+
+        <p>Score: {{selectedRestaurant.grades[0].score}}</p>
+
+        <p>Grade: {{selectedRestaurant.grades[0].grade}}</p>
+
+
+    </div>
+
+    <h3>Enter a borough, cuisine, name, and restaurant ID to insert.</h3>
+
+    <form class="form-inline" data-ng-submit="addRestaurant()">
+        <div class="form-group">
+
+            <label for="borough">Borough</label>
+            <input type="text" class="form-control well well-sm" id="borough" placeholder="Borough"
+                   data-ng-model="newBorough">
+        </div>
+        <div class="form-group">
+            <label for="cuisine">Cuisine</label>
+            <input type="text" class="form-control well well-sm" id="cuisine" placeholder="Cuisine"
+                   data-ng-model="newCuisine">
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control well well-sm" id="name" placeholder="Name" data-ng-model="newName">
+        </div>
+        <div class="form-group">
+            <label for="restaurantID">Restaurant ID</label>
+            <input type="text" class="form-control well well-sm" id="restaurantID" placeholder="Restaurant ID"
+                   data-ng-model="newRestaurantID">
+        </div>
+        <h4>Grades</h4><hr>
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="text" class="form-control well well-sm" id="date" placeholder="Date" data-ng-model="newDate">
+        </div>
+        <div class="form-group">
+            <label for="grade">Grade</label>
+            <input type="text" class="form-control well well-sm" id="grade" placeholder="Grade"
+                   data-ng-model="newGrade">
+        </div>
+        <div class="form-group">
+            <label for="score">Score</label>
+            <input type="text" class="form-control well well-sm" id="score" placeholder="Score"
+                   data-ng-model="newScore">
+        </div>
+        <h4>Address</h4><hr>
+        <div class="form-group">
+            <label for="building">Building</label>
+            <input type="text" class="form-control well well-sm" id="building" placeholder="Building"
+                   data-ng-model="newBuilding">
+        </div>
+        <div class="form-group">
+            <label for="street">Street</label>
+            <input type="text" class="form-control well well-sm" id="street" placeholder="Street"
+                   data-ng-model="newStreet">
+        </div>
+        <div class="form-group">
+            <label for="zipcode">ZipCode</label>
+            <input type="text" class="form-control well well-sm" id="zipcode" placeholder="ZipCode"
+                   data-ng-model="newZipcode">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    <hr/>
+    <p>
+        <button data-ng-click="refreshTable()" class="btn btn-default">Refresh Table</button>
+    </p>
+    <hr/>
+
+    <label for="search">Search: </label>
+    <input id="search" type="text" data-ng-model="search">
+
+    <hr/>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>Borough</th>
+            <th>Cuisine</th>
+            <th>Name</th>
+            <th>Restaurant ID</th>
+            <th>Info</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tbody>
+        <tr dir-paginate="restaurant in restaurants | filter: search | itemsPerPage:20">
+
+            <td contenteditable="true" id="updateRestaurantBorough{{restaurant._id}}">{{restaurant.borough}}</td>
+            <td contenteditable="true" id="updateRestaurantCuisine{{restaurant._id}}">{{restaurant.cuisine}}</td>
+            <td contenteditable="true" id="updateRestaurantName{{restaurant._id}}">{{restaurant.name}}</td>
+            <td contenteditable="true" id="updateRestaurant_id{{restaurant._id}}">{{restaurant.restaurant_id}}</td>
+
+            <td><img src="images/info.png" data-ng-click="showRestaurant(restaurant._id)"/></td>
+            <td><img src="images/save.png" data-ng-click="updateRestaurant(restaurant._id)"/></td>
+            <td><img src="images/erase.png" data-ng-click="deleteRestaurant(restaurant._id)"/></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <dir-pagination-controls
+            max-size="5"
+            direction-links="true"
+            boundary-links="true">
+    </dir-pagination-controls>
+
+    </body>
+</div>
+</html>

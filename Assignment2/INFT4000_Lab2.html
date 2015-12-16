@@ -31,17 +31,18 @@
             <div class="form-group">
                 <label for="studentID">Student ID:</label>
                 <input id="studentID" class="form-control" type="text" name="studentID" ng-model="id"
-                       ng-focus="clearError()" ui-mask="w0999999" ui-mask-placeholder ui-mask-placeholder-char="space">
+                       ng-focus="clearError()" ui-mask="A9999999" placeholder="Enter a student number"
+                       ui-mask-placeholder ui-mask-placeholder-char="space">
             </div>
             <div class="form-group">
                 <label for="firstName">First Name:</label>
                 <input id="firstName" class="form-control" type="text" name="firstName" ng-model="fName"
-                       ng-focus="clearError()">
+                       ng-focus="clearError()" placeholder="Enter a first name">
             </div>
             <div class="form-group">
                 <label for="lastName">Last Name:</label>
                 <input id="lastName" class="form-control" type="text" name="lastName" ng-model="lName"
-                       ng-focus="clearError()">
+                       ng-focus="clearError()" placeholder="Enter a last name">
             </div>
             <input id="submitStudent" class="btn btn-default" type="submit" value="Submit">
             <span id="errorField">{{errorText}}</span>
@@ -68,7 +69,7 @@
             <!--</tr>-->
         <!--</table>-->
     <!--</div>-->
-    <div id="grid1" ui-grid="{ data: students }" ui-grid-edit class="grid col-md-6"></div>
+    <div id="grid1" ui-grid="{ data: students }" ui-grid-edit class="grid col-md-6" ng-mouseover="showJSON()"></div>
     <div id="tooltip" ng-show="displayJSON" ng-click="hideTooltip()">{{textJSON}}</div>
 </div>
 </body>

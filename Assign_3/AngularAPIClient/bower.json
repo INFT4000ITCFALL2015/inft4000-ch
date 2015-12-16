@@ -1,0 +1,30 @@
+{
+  "name": "AngularAPIClient",
+  "version": "0.0.0",
+  "homepage": "https://github.com/INFT4000ITCFALL2015/inft4000-ins",
+  "authors": [
+    "mhcrocker <michael.crocker@nscc.ca>"
+  ],
+  "description": "ANgular API Client Demo",
+  "main": "index.html",
+  "keywords": [
+    "Angular",
+    "JSON",
+    "Express",
+    "API"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.8",
+    "bootstrap": "~3.3.6",
+    "angular-resource": "~1.4.8",
+    "angular-base64": "~2.0.5"
+  }
+}
