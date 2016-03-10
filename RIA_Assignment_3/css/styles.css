@@ -1,0 +1,36 @@
+section {
+    /*border: 1px black solid;*/
+}
+
+.question {
+    font-size: 1.8em;
+    /*border: 1px solid black;*/
+}
+
+.answer {
+    width: 22%;
+    height: 4em;
+    float: left;
+    /*border: 1px solid black;*/
+    margin-left: 4%;
+    white-space: normal;
+}
+
+button.answer:nth-child(1) {
+    margin-left: 0;
+}
+
+.selected {
+    background-color: lightgreen;
+}
+
+.clearfix {
+    display: table;
+    content: '';
+    clear: both;
+}
+
+.quiz-item {
+    width: 100%;
+    margin-bottom: 50px;
+}

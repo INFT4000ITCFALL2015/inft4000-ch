@@ -1,0 +1,91 @@
+body {
+    background-color: #000;
+}
+
+input {
+    margin-top: 10px;
+}
+
+#playingArea {
+    background-color: #333;
+    width: 85%;
+    height: 600px;
+    margin-left: 2%;
+    display: inline-block;
+    border: 2px dotted yellow;
+    position: relative;
+}
+
+#shootingArea {
+    background-color: #333;
+    width: 85%;
+    height: 100px;
+    margin-left: 2%;
+    display: inline-block;
+    border: 2px dotted red;
+    position: relative;
+}
+
+#ctrlArea {
+    width: 10%;
+    height: 600px;
+    display: inline-block;
+    border: 2px solid white;
+    vertical-align: top;
+    margin-left: 10px;
+    text-align: center;
+    position: relative;
+}
+
+#scoreArea {
+    width: 10%;
+    height: 100px;
+    display: inline-block;
+    border: 2px solid white;
+    vertical-align: top;
+    margin-left: 10px;
+    text-align: center;
+    position: relative;
+}
+
+#scoreArea p {
+    color: white;
+    font-size: 1.1em;
+}
+
+#bullet {
+    position: absolute;
+    z-index: 1;
+}
+
+#target {
+    position: absolute;
+    z-index: 2;
+}
+
+.hide {
+    display: none;
+}
+
+#garbageBin {
+    position: absolute;
+    bottom: 0px;
+}
+
+.character {
+    width: 100px;
+    height: 100px;
+    z-index: 1;
+}
+
+#splashMessage {
+    position: absolute;
+    width: 20%;
+    height: 15%;
+    background-color: cornflowerblue;
+    font-family: sans-serif;
+    font-size: 1.4em;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 10px;
+}
